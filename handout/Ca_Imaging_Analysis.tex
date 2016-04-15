@@ -110,16 +110,14 @@ directory containing the files you just unzipped.
 \item Load the image stack called \texttt{Calcium\_imaging\_data\_int8.tif} using the \texttt{load\_stack} command.
 \item Calculate the average image using the \texttt{mean} command and assign it to a variable called \texttt{meanIM}.  Plot the image using the \texttt{imagesc} command (see Figure~\ref{fig:mean_ca}). Save your image.
 \item Look at the image. What does this projection tell you about the activity of different neurons?
-\item Start ROI selection GUI using the \texttt{get_roi} command.
-\item Look at the movie. What do you see?
-\item Draw an ellipse around a cell to highlight it. GENERATE MASK.
-\item Calculate average image intensity from the ROI for each frame. Plot the resulting time course using \texttt{plot} (see Figure~\ref{fig:time_trace}). Save your image.
+\item Start ROI selection GUI using the \texttt{get\_roi} command.
+\item Draw an ellipse around a cell to highlight it. Double-click on the ellipse, and the average time-trace of the pixels within your ROI will be returned.
+\item Plot the resulting time course using \texttt{plot} (see Figure~\ref{fig:time_trace}). Save your image.
 \item You will now compute the \textit{change} in fluorescence over time (dF/F)
 	\begin{enumerate}
-	\item Load the file  \texttt{calc\_dF\_F.m}. This gets as input the raw trace from one cell and returns as output the dF/F. You will edit
-	the function to calculate and return the dF/F.
-	\item dF/F = (F-F\sub{0})/F\sub{0}. F\sub{0} is the median of the fluorescence (F) distribution. Calculate this in the function file using the texttt{median} command.
-	\item Subtract F\sub{0} value from each fluorescence (F) value, and then divide the resulting value by F\sub{0}. 	
+	\item Load the file \texttt{calc\_dF\_F.m}. This gets as input the raw trace from one cell and returns as output the dF/F. You will edit	the function to calculate and return the dF/F.
+	\item dF/F = (F-F\sub{0})/F\sub{0}. F\sub{0} is the median of the fluorescence (F) distribution. Calculate this in the function file using the \texttt{median} command.
+	\item Subtract F\sub{0} value from each fluorescence (F) value, and then divide the resulting value by F\sub{0}.
 	\item Run your function and plot the dF/F using \texttt{plot} (see Figure~\ref{fig:time_trace_dff0}). Save your image.
 	\end{enumerate}
 \end{itemize}
@@ -135,13 +133,13 @@ directory containing the files you just unzipped.
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{../MATLAB_complete/trace_raw.pdf}
-    \caption{Time trace}
+    \caption{Raw fluorescence trace}
     \label{fig:time_trace}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{../MATLAB_complete/trace_delta_f_f0.pdf}
-    \caption{Time trace}
+    \caption{$\Delta F/F_0$ time trace}
     \label{fig:time_trace_dff0}
     \end{subfigure}
     
@@ -153,10 +151,10 @@ Compute the average response timecourse over multiple repetitions of the same st
 
 \begin{itemize}
 \setlength{\parskip}{0.25em}
-\item Draw below how this stimulation paradigm looks like by indicating the time in seconds for baseline and for stimulus presentation for an example orientation presentation (one repetition).\vspace{3in}
+\item Draw below what this stimulation paradigm looks like over time, by indicating the time in seconds for baseline and for stimulus presentation, for a single presentation of a drafting grating.\vspace{3in}
 \item How many frames are in one stimulus presentation (blank+stim)? What is the imaging frame rate? Add the number of frames on your drawing above.
-\item Split up the response into presentations of the same directions, over the three trials per direction. Edit file \texttt{TEMPLATE\_FILE.m}.
-\item Average the three individual trial traces for each direction and plot these average traces for each of the 16 stimulus direions on the same plot (see Figure~\ref{fig:trace_all_ori}).
+\item Split up the response into presentations of the same directions, over the three trials per direction. Edit file \texttt{meanTraces.m}.
+\item Average the three individual trial traces for each direction and plot these average traces for each of the 16 stimulus directions on the same plot (see Figure~\ref{fig:trace_all_ori}).
 \item Plot a single average trace over all stimuli. Where does the peak fall with respect to the stimulus start time? Refer to your diagram, above.
 \end{itemize}
 
@@ -171,7 +169,7 @@ Compute the average response timecourse over multiple repetitions of the same st
     \begin{subfigure}[b]{0.44\textwidth}
         \includegraphics[width=\textwidth]{../MATLAB_complete/polar_ori.pdf}
         \caption{Polar plot of average response}
-        \label{fig:polar_ori}
+        \label{fig:polar_ori_plot}
     \end{subfigure}
 %    \begin{subfigure}[b]{0.45\textwidth}
 %    \includegraphics[width=\textwidth]{../MATLAB_complete/trace_dff_global_mean.pdf}    
@@ -183,14 +181,15 @@ Compute the average response timecourse over multiple repetitions of the same st
 \end{figure}
 
 \subsection{Calculate responses to different stimuli}
-You will now find the mean response to each of the 16 stimulus orientations. EDIT FILE XXX
+You will now find the mean response to each of the 16 stimulus orientations. Edit the file \texttt{makePolarPlot.m}.
 \begin{itemize}
 \setlength{\parskip}{0.25em}
 \item Choose a window of 5 time points that should contain the peak response to a stimulus, during the stimulus period. Average the 5 time points within this window, from the average timecourse of each stimulus orientation.
-\item Plot the mean responses on a polar plot, which will reveal the orientation tuning of the cell, using the \texttt{polar} command (see Figure~\ref{fig:polar_ori}). Why is a polar plot a better choice than a conventional x/y line or scatter plot?
+\item Plot the mean responses on a polar plot, which will reveal the orientation tuning of the cell, using the \texttt{polar} command (see Figure~\ref{fig:polar_ori_plot}). Why is a polar plot a better choice than a conventional x/y line or scatter plot?
 \item Is your cell tuned to the drift direction of the stimulus? Is your cell tuned to the drift direction of two stimuli of the same orientation?
 \item Compute the orientation selectivity index (OSI):
     \begin{enumerate}
+    \item Edit the file \texttt{calc\_osi.m}
     \item Find the stimulus direction that caused the biggest response (`preferred' stimulus).
     \item Find the mean response of the preferred stimulus, and the stimulus of opposite drift direction (180 degrees away), and average the two values.
     \item Find the mean response of the two stimuli that are 90 degree away from the preferred stimulus (`orthogonal' stimuli), and average the two values.
@@ -200,13 +199,12 @@ You will now find the mean response to each of the 16 stimulus orientations. EDI
 \end{itemize}
 
 \subsection{Repeating for other cells}
-You should now have a series of files that you can call in sequence to get a polar plot. FILE A THEN FILE B THEN FILE C.... If you select a new cell, you can pass it through these functions to quickly generate a polar plot. 
+You should now have a series of files that you can call in sequence to get a polar plot: \texttt{calc\_dF\_F.m} then \texttt{meanTraces.m} then \texttt{makePolarPlot.m} then \texttt{calc\_osi.m}. If you select a new cell, you can pass it through these functions to quickly generate a polar plot. 
 
 \begin{itemize}
 \setlength{\parskip}{0.25em}
 \item Create a new function called \texttt{batch.m}. Provide as an input argument the response time course. 
-\item In the function body call the functions you have made in order. Passing the correct inputs and outputs to each so that 
-you can feed \texttt{batch.m} a response time course and get back a polar plot. 
+\item In the function body call the functions you have made in order. Passing the correct inputs and outputs to each so that you can feed \texttt{batch.m} a response time course and get back a polar plot. 
 \item Run \texttt{batch.m} for 5 different cells and save the resulting plots. 
 \end{itemize}
 
