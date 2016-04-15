@@ -20,9 +20,19 @@ PlayStack(tfStack);
 
 %% - Use the ROI selection tool to draw a ROI and export the time trace
 
-mbROIMask = false(size(meanIM));
-mbROIMask(207:219, 106:119) = true;
+% - open mean image and add ellipse selection tool to it
+imtool(meanIM);
+h = imellipse(imgca());
+maskPos = wait(h);
+if ~isempty(maskPos)
+    mbROIMask = createMask(h);
+else
+    disp('Hey, you have to select a ROI!')
+    mbROIMask = [];
+end
+close(imgcf());
 
+% - extract ROI trace
 tfStackStretch = reshape(tfStack, 256*256, []);
 mfROIPixels = tfStackStretch(reshape(mbROIMask, 256*256, []), :);
 
