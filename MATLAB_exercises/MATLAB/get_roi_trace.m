@@ -1,5 +1,12 @@
 function vfTrace = get_roi_trace(tfStack)
 
+% vfTrace = get_roi_trace(tfStack)
+%
+% 'tfStack' is a variable with dimensions (x, y, frames). A window will
+% appear for you to draw an ellipse ROI. The pixels within the ellipse will
+% be averaged, and the time trace for that ROI will be returned in
+% 'vfTrace'.
+
 disp('Draw an ellipse, then double-click to extract the trace');
 
 imtool(mean(tfStack, 3), [0 5]);

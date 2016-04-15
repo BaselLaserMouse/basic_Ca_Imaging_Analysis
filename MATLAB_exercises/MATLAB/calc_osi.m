@@ -1,12 +1,21 @@
 function fOSI = calc_osi(vfMeanResp)
 
-nNumStimuli = 16;
+% 'vfMeanResp' is a vector containing the average response for each
+% stimulus direction, with dimensions (1, stim). You must calculate the
+% orientation selectivity index (OSI), as described in the handout.
 
-[~, vnPreferredOri] = max(vfMeanResp);
-vnPreferredOri(2) = mod(vnPreferredOri + nNumStimuli/2, nNumStimuli);
-vnOrthogonalOri = mod(vnPreferredOri + nNumStimuli/4, nNumStimuli);
+% Find the preferred stimulus direction. Hint: The 'max' command also
+% returns the index of the maximum value.
 
-fPreferredResp = mean(vfMeanResp(vnPreferredOri));
-fOrthogonalResp = mean(vfMeanResp(vnOrthogonalOri));
 
-fOSI = (fPreferredResp - fOrthogonalResp) ./ (fPreferredResp + fOrthogonalResp);
+% Find the index of the stimulus 180º off from preferred. Hint: the 'mod'
+% command will be helpful here.
+
+
+% Find the indices of the two stimuli orthogonal to the preferred stimulus
+
+
+% Compute the averages of the "preferred" and "orthogonal" stimuli responses
+
+% Compute the OSI using the preferred and orthogonal responses
+
