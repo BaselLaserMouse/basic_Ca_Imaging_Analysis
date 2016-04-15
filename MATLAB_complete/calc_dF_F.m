@@ -1,9 +1,8 @@
-function dff=calc_dF_F(data)
-% function calc_dF_F(data)	
-%
-% Calculate df/f from data matrix (first col orientation and second col signal)
-%
+function vfTrace_dFF0 = calc_dF_F(vfTrace)
 
+% 'vfTrace' is a vector of raw fluourescence values for each frame. Compute
+% the 'F0' value, which is the median of the trace. Then compute (F-F0)/F0,
+% and return the result in a variable 'vfTrace_dFF0'.
 
-f0 = median(data(:,2));
-dff=(data(:,2)-f0)/f0;
+fF0 = median(vfTrace);
+vfTrace_dFF0 = (vfTrace - fF0) ./ fF0;

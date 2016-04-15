@@ -1,59 +1,66 @@
-function [grandMu,u] = meanTraces(data)
-% function [grandMu,orientations] = meanTraces(data)`
-%
-% Produce two plots showing:
-% 1) 16 overlaid average traces (one from each orientation) from the three reps of each stimulus.  
-% 2) a single grand average.
-%
-% outputs:
-% 1. A matrix of df/f time course (rows) and stimuli (cols)
-% 2. the orientations of the stimuli (degrees) for each column
+function [mfResponse] = meanTraces(vfTrace_dFF0, Orientation)
 
-%dff = calc_dF_F(data); %Get the df/f using function we have already made
-dff = data(:,2);
-numReps=3; %the number of repeats of each stimulus. We will need this to make the plot
+% 'vfTrace_dFF0' is a response trace, with one fluorescence value for each
+% frame. 'Orientation' is a vector of values, with one entry for each frame
+% in 'vfTrace_dFF0'; each entry indicates the stimulus drift direction used
+% during that imaging frame, in degrees. The stimuli were presented in
+% random order.
 
-clf
+% This function has to use the stimulus information to de-randomise the
+% response trace. You will create a variable 'mfResponse', which has
+% dimensions (stimulus, frame_in_presentation).
 
+% 'mfResponse' needs to contain the average response traces for each
+% stimulus drift direction, averaged over three trials.
 
-%First plot: averages of each orientation
-subplot(1,2,1)
-u=unique(data(:,1))'; %Get the unique orientations and convert to column vector
+% How many stimuli were there?
+nNumStimuli = 16;
 
-myColours = lines(length(u)); %generate some colours so we can plot each line distinctly
-hold on %to overlay all lines on the same graph
+% How many trials were there for each stimulus?
+nNumTrials = 3;
 
-grandMu=[]; %we will fill this matric to eventually create a grand average for the second plot
+% How many total stimulus presentations were there?
+nTotalStimuli = nNumStimuli * nNumTrials;
 
-n=1; %counter to make the colours work
-for ii=u
-	f=find(data(:,1)==ii); %indexes containing this orientation
-	thisOrientation=dff(f); %make a temporary variable
+% What was the duration of the "blank" stimulus?
+tBlankDuration = 3.5; % seconds
 
-	%The temporary variable we made has all three repeats chained together as a single
-	%vector. We need to average them, however. The easiest way of doing this is to build
-	%a matrix where each repeat is a different colunn
-	thisOrientation = reshape(thisOrientation,length(thisOrientation)/numReps,numReps);
+% What was the duration of the "real" stimulus?
+tStimDuration = 1.5;  % seconds
 
-	%now we can average across columns
-	thisOrientation = mean(thisOrientation,2);
+% What was the total duration of each stimulus presentation (blank + stim)?
+tTotalStimDuration = tBlankDuration + tStimDuration;
 
+% Estimate the frame rate of imaging. Hint: The function 'numel' returns
+% how many elements there are in a vector.
+tFrameRate = numel(vfTrace_dFF0) ./ (nTotalStimuli * tTotalStimDuration);
 
-	plot(thisOrientation, '-', 'color', myColours(n,:))
-	grandMu = [grandMu,thisOrientation]; %concatenate 
-	n=n+1;
+% How many frames were there in each stimulus presentation?
+nTotalStimFrames = tTotalStimDuration .* tFrameRate;
 
+% Allocate the return variable 'mfResponse'. Hint: the function 'zeros'
+% creates a variable of specified dimensions.
+mfResponse = zeros(nNumStimuli, nTotalStimFrames);
+
+% Loop over presentations
+for (nPresentation = 1:nTotalStimuli)
+   % - Create a window for frames in 'vfTrace_dFF0' corresponding to this
+   % stimulus presentation. Hint: (1:N) creates a vector of numbers
+   % counting 1 2 3 ... N
+   vnWindow = (1:nTotalStimFrames) + (nPresentation-1) * nTotalStimFrames; %#ok<BDSCI>
+   
+   % - Which stimulus direction was presented? This information is in
+   % 'Orientation'. Convert it to an index into 'mfResponse'. Hint: The
+   % directions span 360 degrees, and there are 16 of them.
+   fThisOri = Orientation(vnWindow(1));
+   nThisOriIndex = fThisOri / 360 * nNumStimuli;
+   
+   % - Add the frames from 'vfTrace_dFF0' into 'mfResponse'. You will need
+   % to use the stimulus index for 'mfResponse' and the window you made for
+   % 'vfTrace_dFF0'. Hint: mfResponse(nIndex, :) assigns something to all
+   % the entries along the dimension with the ':'.
+   mfResponse(nThisOriIndex, :) = mfResponse(nThisOriIndex, :) + vfTrace_dFF0(vnWindow);
 end
-hold off %switch off overlay
-box on
-ylabel('df/f')
-xlabel('#frame')
-xlim([1,21]) %keep x axis tight around data range
-yl = ylim; %get the y axis limits
 
-%Second plot: grand average
-subplot(1,2,2)
-plot(mean(grandMu,2),'-ok','MarkerFaceColor',[1,1,1]*0.5)
-xlabel('#frame')
-xlim([1,21])
-ylim(yl) %make the mean y axis the same as the other plot. 
+% - Convert 'mfResponse' to an average by dividing by the number of trials
+mfResponse = mfResponse ./ nNumTrials;
