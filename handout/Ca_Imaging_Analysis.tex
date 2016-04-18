@@ -20,7 +20,11 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
-
+\usepackage{epsfig}            % to insert PostScript figures
+\graphicspath{
+    {./eps/}
+    {../MATLAB_complete/}
+}
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
@@ -82,8 +86,8 @@ MATLAB functions you have been provided.
 You will be supplied with with raw Ca\supr{++} imaging data from mouse V1. The mouse 
 was anesthetized and was stimulated drifting black and white grating stimuli, drifting in multiple different directions. From these data
 we can obtain a direction and orientation tuning curve for each cell in the field of view. Your task will be to to 
-extract the raw fluorescence intensity trace from one cell, convert this to dF/F, and then 
-determine the dF/F for each stimulus in order to produce a polar plot that shows response magnitude
+extract the raw fluorescence intensity trace from one cell, convert this to $dF/F$, and then 
+determine the $dF/F$ for each stimulus in order to produce a polar plot that shows response magnitude
 for different drift directions. You will then be able to select different cells and quickly pass the extracted 
 response timecourses through the functions you have written to get tuning curves for several 
 different cells. 
@@ -99,10 +103,15 @@ Remember that typing \texttt{help function\_name} in MATLAB will give you a lot 
 \setlength{\parskip}{0.25em}
 \item Download the data needed for this practical from \textit{http://mouse.vision/ca.zip} and unpack the zip archive. 
 \item Start MATLAB.
-\item Use the change directory button at the top of the screen (SCREENSHOT) to navigate to the 
+\item Use the change directory button at the top of the screen to navigate to the 
 directory containing the files you just unzipped. 
 \end{itemize}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{change_dir.eps}
+    \caption{}
+\end{figure}
 
 \subsection{Extract response time-course from a cell}
 \begin{itemize}
@@ -113,12 +122,12 @@ directory containing the files you just unzipped.
 \item Start ROI selection GUI using the \texttt{get\_roi} command.
 \item Draw an ellipse around a cell to highlight it. Double-click on the ellipse, and the average time-trace of the pixels within your ROI will be returned.
 \item Plot the resulting time course using \texttt{plot} (see Figure~\ref{fig:time_trace}). Save your image.
-\item You will now compute the \textit{change} in fluorescence over time (dF/F)
+\item You will now compute the \textit{change} in fluorescence over time ($dF/F$)
 	\begin{enumerate}
-	\item Load the file \texttt{calc\_dF\_F.m}. This gets as input the raw trace from one cell and returns as output the dF/F. You will edit	the function to calculate and return the dF/F.
-	\item dF/F = (F-F\sub{0})/F\sub{0}. F\sub{0} is the median of the fluorescence (F) distribution. Calculate this in the function file using the \texttt{median} command.
-	\item Subtract F\sub{0} value from each fluorescence (F) value, and then divide the resulting value by F\sub{0}.
-	\item Run your function and plot the dF/F using \texttt{plot} (see Figure~\ref{fig:time_trace_dff0}). Save your image.
+	\item Load the file \texttt{calc\_dF\_F.m}. This gets as input the raw trace from one cell and returns as output the $dF/F$. You will edit	the function to calculate and return the $dF/F$.
+	\item Calculate $dF/F = (F-F_0)/F_0$. $F_0$ is the median of the fluorescence (F) distribution. Calculate this in the function file using the \texttt{median} command.
+	\item Subtract $F_0$ value from each fluorescence ($F$) value, and then divide the resulting value by $F_0$.
+	\item Run your function and plot the $dF/F$ using \texttt{plot} (see Figure~\ref{fig:time_trace_dff0}). Save your image.
 	\end{enumerate}
 \end{itemize}
 
@@ -126,19 +135,19 @@ directory containing the files you just unzipped.
     \centering
     
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{../MATLAB_complete/mean_image.pdf}
+    \includegraphics[width=\textwidth]{mean_image.pdf}
     \caption{Mean projection}
     \label{fig:mean_ca}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{../MATLAB_complete/trace_raw.pdf}
+    \includegraphics[width=\textwidth]{trace_raw.pdf}
     \caption{Raw fluorescence trace}
     \label{fig:time_trace}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{../MATLAB_complete/trace_delta_f_f0.pdf}
+    \includegraphics[width=\textwidth]{trace_delta_f_f0.pdf}
     \caption{$\Delta F/F_0$ time trace}
     \label{fig:time_trace_dff0}
     \end{subfigure}
@@ -161,18 +170,18 @@ Compute the average response timecourse over multiple repetitions of the same st
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.46\textwidth}
-    \includegraphics[width=\textwidth]{../MATLAB_complete/trace_dff_all_ori.pdf}    
+    \includegraphics[width=\textwidth]{trace_dff_all_ori.pdf}    
     \caption{Average response, all orientations}
     \label{fig:trace_all_ori}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.44\textwidth}
-        \includegraphics[width=\textwidth]{../MATLAB_complete/polar_ori.pdf}
+        \includegraphics[width=\textwidth]{polar_ori.pdf}
         \caption{Polar plot of average response}
         \label{fig:polar_ori_plot}
     \end{subfigure}
 %    \begin{subfigure}[b]{0.45\textwidth}
-%    \includegraphics[width=\textwidth]{../MATLAB_complete/trace_dff_global_mean.pdf}    
+%    \includegraphics[width=\textwidth]{trace_dff_global_mean.pdf}    
 %    \caption{Global average response}
 %    \label{fig:trace_global_mean}
 %    \end{subfigure}
