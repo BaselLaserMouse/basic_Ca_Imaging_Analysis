@@ -21,7 +21,7 @@
 
 \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
 \usepackage{epsfig}            % to insert PostScript figures
-\graphicspath{
+\graphicspath{%
     {./eps/}
     {../MATLAB_complete/}
 }
@@ -62,7 +62,7 @@
 
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
 
-\title{	
+\title{%
 \normalfont \normalsize 
 \textsc{Universit\"{a}t Basel, Mrsic-Flogel Lab} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.2cm] % Thin top horizontal rule
@@ -98,7 +98,7 @@ While you work through the exercise, write your responses to the questions in a 
 
 Remember that typing \texttt{help function\_name} in MATLAB will give you a lot of information about how to use the function.
 
-\subsection{Start MATLAB and download the data}
+\section{Start MATLAB and download the data}
 \begin{itemize}
 \setlength{\parskip}{0.25em}
 \item Download the data needed for this practical from \textit{http://mouse.vision/ca.zip} and unpack the zip archive. 
@@ -113,7 +113,7 @@ directory containing the files you just unzipped.
     \caption{}
 \end{figure}
 
-\subsection{Extract response time-course from a cell}
+\section{Extract response time-course from a cell}
 \begin{itemize}
 \setlength{\parskip}{0.25em}
 \item Load the image stack called \texttt{Calcium\_imaging\_data\_int8.tif} using the \texttt{load\_stack} command.
@@ -155,7 +155,7 @@ directory containing the files you just unzipped.
     \caption{}
 \end{figure}
 
-\subsection{Understanding the stimulus presentation paradigm}
+\section{Understanding the stimulus presentation paradigm}
 Compute the average response timecourse over multiple repetitions of the same stimulus. In this dataset, each of the 16 stimulus drift directions was presented 3 times (The drifting grating was presented for 1.5 seconds preceded by a gray screen presented for 3.5 seconds). The drift direction in degrees presented for each stimulus frame is saved in the file \texttt{ori\_stimuli.mat}.
 
 \begin{itemize}
@@ -189,7 +189,7 @@ Compute the average response timecourse over multiple repetitions of the same st
     \caption{}
 \end{figure}
 
-\subsection{Calculate responses to different stimuli}
+\section{Calculate responses to different stimuli}
 You will now find the mean response to each of the 16 stimulus orientations. Edit the file \texttt{makePolarPlot.m}.
 \begin{itemize}
 \setlength{\parskip}{0.25em}
@@ -207,7 +207,7 @@ You will now find the mean response to each of the 16 stimulus orientations. Edi
     \end{enumerate}
 \end{itemize}
 
-\subsection{Repeating for other cells}
+\section{Repeating for other cells}
 You should now have a series of files that you can call in sequence to get a polar plot: \texttt{calc\_dF\_F.m} then \texttt{meanTraces.m} then \texttt{makePolarPlot.m} then \texttt{calc\_osi.m}. If you select a new cell, you can pass it through these functions to quickly generate a polar plot. 
 
 \begin{itemize}
