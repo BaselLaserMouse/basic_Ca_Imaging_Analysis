@@ -195,43 +195,54 @@ In the following, you will compute the average response timecourse over the mult
         \caption{Polar plot of average response}
         \label{fig:polar_ori_plot}
     \end{subfigure}
-%    \begin{subfigure}[b]{0.45\textwidth}
-%    \includegraphics[width=\textwidth]{trace_dff_global_mean.pdf}    
-%    \caption{Global average response}
-%    \label{fig:trace_global_mean}
-%    \end{subfigure}
-    
     \caption{}
 \end{figure}
 
+
 \section{Calculate responses to different stimuli}
-You will now find the mean response to each of the 16 stimulus orientations. Edit the file \texttt{makePolarPlot.m}.
+
+You will now find the mean response to each of the 16 stimulus orientations.
+
 \begin{itemize}
-\setlength{\parskip}{0.25em}
-\item Choose a window of 5 time points that should contain the peak response to a stimulus, during the stimulus period. Average the 5 time points within this window, from the average timecourse of each stimulus orientation.
-\item Plot the mean responses on a polar plot, which will reveal the orientation tuning of the cell, using the \texttt{polar} command (see Figure~\ref{fig:polar_ori_plot}). Why is a polar plot a better choice than a conventional x/y line or scatter plot?
+\item Open the file \texttt{makePolarPlot.m}. This function will be used to display the mean response for each orientation.
+  \textbf{Edit} the function as follows:
+  \begin{enumerate}
+  \item Choose a window of 5 time points that should contain the peak response to a stimulus, during the stimulus period.
+  \item Average the 5 time points within this window, from the average timecourse of each stimulus orientation.
+  \item Plot the mean responses on a polar plot, which will reveal the orientation tuning of the cell, using the \texttt{polar} function (see Figure~\ref{fig:polar_ori_plot}).
+  \end{enumerate}
+\item Why is a polar plot a better choice than a conventional x/y line or scatter plot? \textbf{Write} down your answer.
+  \vspace{1em}
+\item Use the \texttt{makePolarPlot} function to plot the preferred orientation(s) of your cell. \textbf{Save} your image.
 \item Is your cell tuned to the drift direction of the stimulus? Is your cell tuned to the drift direction of two stimuli of the same orientation?
-\item Compute the orientation selectivity index (OSI):
-    \begin{enumerate}
-    \item Edit the file \texttt{calc\_osi.m}
-    \item Find the stimulus direction that caused the biggest response (`preferred' stimulus).
-    \item Find the mean response of the preferred stimulus, and the stimulus of opposite drift direction (180 degrees away), and average the two values.
-    \item Find the mean response of the two stimuli that are 90 degree away from the preferred stimulus (`orthogonal' stimuli), and average the two values.
-    \item Orientation selectivity index (OSI) is calculated as \\ $OSI = {\left(preferred - orthogonal\right)} / {\left(preferred + orthogonal\right)}$
-    \item Add the OSI to your polar plot, using the \texttt{title} command.
-    \end{enumerate}
+  \textbf{Write} down your answer.
+  \vspace{2em}
 \end{itemize}
 
+To assess the selectivity of your cell, you will compute its \emph{orientation selectivity index} (OSI).
+
+\begin{itemize}
+\item \textbf{Edit} the file \texttt{calc\_osi.m} as follows:\todo{simplify \texttt{mod} use in the script?}
+  \begin{enumerate}
+  \item Find the stimulus direction that caused the biggest response (`preferred' stimulus).
+  \item Find the mean response of the preferred stimulus, and the stimulus of opposite drift direction (180 degrees away), and average the two values.
+  \item Find the mean response of the two stimuli that are 90 degree away from the preferred stimulus (`orthogonal' stimuli), and average the two values.
+  \item Orientation selectivity index (OSI) is calculated as \\ $OSI = {\left(preferred - orthogonal\right)} / {\left(preferred + orthogonal\right)}$
+  \end{enumerate}
+\item Add the OSI to your polar plot, using the \texttt{title} function.\todo{re-save the image?}
+\end{itemize}
+
+\todo[inline]{Question about negative $OSI \in [0; 1]$? Problems if $dF/F$ is negative?}
+
+
 \section{Repeating for other cells}
+
 You should now have a series of files that you can call in sequence to get a polar plot: \texttt{calc\_dF\_F.m} then \texttt{meanTraces.m} then \texttt{makePolarPlot.m} then \texttt{calc\_osi.m}. If you select a new cell, you can pass it through these functions to quickly generate a polar plot. 
 
 \begin{itemize}
-\setlength{\parskip}{0.25em}
-\item Create a new function called \texttt{batch.m}. Provide as an input argument the response time course. 
-\item In the function body call the functions you have made in order. Passing the correct inputs and outputs to each so that you can feed \texttt{batch.m} a response time course and get back a polar plot. 
-\item Run \texttt{batch.m} for 5 different cells and save the resulting plots. 
+\item \textbf{Create} a new function called \texttt{cellbatch}, in a file called \texttt{cellbatch.m}. Provide as an input argument the response time course. In the function body call the functions you have made in order. Passing the correct inputs and outputs to each so that you can feed \texttt{cellbatch} function a response time course and get back a polar plot.
+\item Run \texttt{cellbatch} for 5 different cells and \textbf{save} the resulting plots.
 \end{itemize}
-
 
 
 \end{document}
