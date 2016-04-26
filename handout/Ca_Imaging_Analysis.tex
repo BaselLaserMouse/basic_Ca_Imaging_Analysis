@@ -133,7 +133,7 @@ First, you will load images, select a cell and display its raw time series, as f
 
 Now you will compute the \textit{change} in fluorescence over time ($dF/F$).
 \begin{itemize}
-\item Open the provided file \texttt{calc\_dF\_F.m}. This gets as input the raw trace from one cell and returns as output the $dF/F$. You will \textbf{edit} the function to calculate and return the $dF/F$. In the file:
+\item Open the provided file \texttt{calc\_dF\_F.m}. This function gets as input the raw trace from one cell and returns as output the $dF/F$. \textbf{Edit} the function to calculate and return the $dF/F$, as follows:
   \begin{enumerate}
   \item Calculate $dF/F = (F-F_0)/F_0$. $F_0$ is the median of the fluorescence ($F$) distribution. Calculate this using the \texttt{median} function.
   \item Subtract $F_0$ value from each fluorescence ($F$) value, and then divide the resulting value by $F_0$.
@@ -165,16 +165,21 @@ Now you will compute the \textit{change} in fluorescence over time ($dF/F$).
     \caption{}
 \end{figure}
 
+
 \section{Understanding the stimulus presentation paradigm}
-Compute the average response timecourse over multiple repetitions of the same stimulus. In this dataset, each of the 16 stimulus drift directions was presented 3 times (The drifting grating was presented for 1.5 seconds preceded by a gray screen presented for 3.5 seconds). The drift direction in degrees presented for each stimulus frame is saved in the file \texttt{ori\_stimuli.mat}.
+
+In this dataset, each of the 16 stimulus drift directions was presented 3 times (The drifting grating was presented for 1.5 seconds preceded by a gray screen presented for 3.5 seconds).
+In the following, you will compute the average response timecourse over the multiple repetitions of the same stimulus.
 
 \begin{itemize}
-\setlength{\parskip}{0.25em}
-\item Draw below what this stimulation paradigm looks like over time, by indicating the time in seconds for baseline and for stimulus presentation, for a single presentation of a drafting grating.\vspace{3in}
-\item How many frames are in one stimulus presentation (blank+stim)? What is the imaging frame rate? Add the number of frames on your drawing above.
-\item Split up the response into presentations of the same directions, over the three trials per direction. Edit file \texttt{meanTraces.m}.
-\item Average the three individual trial traces for each direction and plot these average traces for each of the 16 stimulus directions on the same plot (see Figure~\ref{fig:trace_all_ori}).
-\item Plot a single average trace over all stimuli. Where does the peak fall with respect to the stimulus start time? Refer to your diagram, above.
+\item \textbf{Draw} below what this stimulation paradigm looks like over time, by indicating the time in seconds for baseline and for stimulus presentation, for a single presentation of a drafting grating.
+  \vspace{3in}
+\item How many frames are in one stimulus presentation (blank+stim)? What is the imaging frame rate? \textbf{Write} down your answers and \textbf{add} the number of frames on your drawing above.
+\item The drift direction in degrees presented for each stimulus frame is saved in the file \texttt{ori\_stimuli.mat}.
+  Load these data using the \texttt{load} function. \textbf{Write} down the name of the loaded variable containing the orientation information:
+\item Open the provided file \texttt{meanTraces.m}. This function will be used to split up the response into presentations of the same directions, over the three trials per direction, and average over trials. \textbf{Complete} the file \texttt{meanTraces.m}. Pay attention to the comments in the file.
+\item Average the three individual trial traces for each direction using your \texttt{meanTraces} function. Plot these average traces for each of the 16 stimulus directions on the same plot (see Figure~\ref{fig:trace_all_ori}). \textbf{Save} your image.
+\item Plot a single average trace over all stimuli. Where does the peak fall with respect to the stimulus start time? Refer to your diagram, above.\todo{Should they write something on the diagram?}
 \end{itemize}
 
 \begin{figure}

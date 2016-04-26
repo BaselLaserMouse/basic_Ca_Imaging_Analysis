@@ -43,7 +43,7 @@ nTotalStimFrames = tTotalStimDuration .* tFrameRate;
 mfResponse = zeros(nNumStimuli, nTotalStimFrames);
 
 % Loop over presentations
-for (nPresentation = 1:nTotalStimuli)
+for nPresentation = 1:nTotalStimuli
    % - Create a window for frames in 'vfTrace_dFF0' corresponding to this
    % stimulus presentation. Hint: (1:N) creates a vector of numbers
    % counting 1 2 3 ... N
