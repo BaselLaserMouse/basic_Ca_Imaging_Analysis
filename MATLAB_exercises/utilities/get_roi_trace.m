@@ -9,6 +9,10 @@ function vfTrace = get_roi_trace(tfStack)
 
 disp('Draw an ellipse, then double-click to extract the trace');
 
+if size(tfStack, 3) < 2
+    error('Input stack has only one frame!')
+end
+
 imtool(mean(tfStack, 3), [0 5]);
 h = imellipse(imgca());
 maskPos = wait(h);
