@@ -10,14 +10,14 @@ nNumStimuli = 16;
 % returns the index of the maximum value.
 [~, vnPreferredOri] = max(vfMeanResp);
 
-% Find the index of the stimulus 180º off from preferred. Hint: the 'mod'
-% command will be helpful here.
-vnPreferredOri(2) = mod(vnPreferredOri + nNumStimuli/2, nNumStimuli);
+% Find the index of the stimulus 180 degrees off from preferred.
+vnPreferredOri(2) = mod(vnPreferredOri + nNumStimuli/2 - 1, nNumStimuli) + 1;
 
 % Find the indices of the two stimuli orthogonal to the preferred stimulus
-vnOrthogonalOri = mod(vnPreferredOri + nNumStimuli/4, nNumStimuli);
+vnOrthogonalOri = mod(vnPreferredOri + nNumStimuli/4 - 1, nNumStimuli) + 1;
 
 % Compute the averages of the "preferred" and "orthogonal" stimuli responses
+% Hint: use vnPreferredOri and vnOrthogonalOri to index vfMeanResp
 fPreferredResp = mean(vfMeanResp(vnPreferredOri));
 fOrthogonalResp = mean(vfMeanResp(vnOrthogonalOri));
 
