@@ -186,17 +186,16 @@ You will now find the mean response to each of the 16 stimulus orientations.
 To assess the selectivity of your cell, you will compute its \emph{orientation selectivity index} (OSI).
 
 \begin{itemize}
-\item \textbf{Edit} the file \texttt{calc\_osi.m} as follows:\todo{simplify \texttt{mod} use in the script?}
+\item \textbf{Edit} the file \texttt{calc\_osi.m} as follows:
   \begin{enumerate}
   \item Find the stimulus direction that caused the biggest response (`preferred' stimulus).
   \item Find the mean response of the preferred stimulus, and the stimulus of opposite drift direction (180 degrees away), and average the two values.
   \item Find the mean response of the two stimuli that are 90 degree away from the preferred stimulus (`orthogonal' stimuli), and average the two values.
   \item Orientation selectivity index (OSI) is calculated as \\ $OSI = {\left(preferred - orthogonal\right)} / {\left(preferred + orthogonal\right)}$
   \end{enumerate}
-\item Add the OSI to your polar plot, using the \texttt{title} function.\todo{re-save the image?}
+\item Add the OSI to your polar plot, using the \texttt{title} function.
+  \textbf{Replace} the previously saved image by this one.
 \end{itemize}
-
-\todo[inline]{Question about negative $OSI \in [0; 1]$? Problems if $dF/F$ is negative?}
 
 
 \section{Repeating for other cells}
@@ -208,5 +207,14 @@ You should now have a series of files that you can call in sequence to get a pol
 \item Run \texttt{cellbatch} for 5 different cells and \textbf{save} the resulting plots.
 \end{itemize}
 
+
+\section*{Documents to give backs}
+
+At the end of this tutorial you should give back:
+\begin{itemize}
+  \item this handout, completed with your names and answers to the questions,
+  \item a archive (.zip) file containing the completed functions and saved images.
+\end{itemize}
+\textbf{Send} this archive to your tutor by email, with group members names.
 
 \end{document}
