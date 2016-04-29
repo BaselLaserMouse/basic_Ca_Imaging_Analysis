@@ -1,51 +1,22 @@
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Short Sectioned Assignment
-% LaTeX Template
-% Version 1.0 (5/5/12)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% Original author:
-% Frits Wenneker (http://www.howtotex.com)
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
-
-\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\documentclass[paper=a4, fontsize=11pt]{article} % A4 paper and 11pt font size
 \usepackage{epsfig}            % to insert PostScript figures
 \graphicspath{%
     {./eps/}
     {../MATLAB_complete/}
 }
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{fullpage}
+\usepackage{helvet}
+\usepackage[compact]{titlesec}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 0pt minus 5pt}
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{gensymb}
 \usepackage{chemmacros}
 \usepackage{graphicx,caption,subcaption}
-\usepackage{sectsty} % Allows customizing section commands
-\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
 \usepackage{todonotes}
-
-\usepackage{fancyhdr} % Custom headers and footers
-\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
-\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
-\fancyfoot[L]{} % Empty left footer
-\fancyfoot[C]{} % Empty center footer
-\fancyfoot[R]{\thepage} % Page numbering for right footer
-\renewcommand{\headrulewidth}{0pt} % Remove header underlines
-\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
-\setlength{\headheight}{13.6pt} % Customize the height of the header
-\setlength{\parskip}{1em}
+\setlength{\parskip}{18pt}
 
 \numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 \numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
@@ -61,23 +32,15 @@
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
-
-\title{%
-\normalfont \normalsize 
-\textsc{Universit\"{a}t Basel, Mrsic-Flogel Lab} \\ [25pt] % Your university, school and/or department name(s)
-\horrule{0.5pt} \\[0.2cm] % Thin top horizontal rule
-\huge Ca\supr{++} Imaging Analysis in MATLAB
-\horrule{1.5pt}\\ % Thick bottom horizontal rule
-}
-
-\author{}
-
-\date{\normalsize\today} % Today's date or a custom date
+\title{Ca\supr{++} Imaging Analysis in MATLAB}
+\author{Universit\"{a}t Basel, Mrsic-Flogel Lab}
+\date{}
 
 \begin{document}
 
 \maketitle % Print the title
+
+\section*{Introduction}
 
 In this practical you will analyse 2-photon imaging data using MATLAB. This is the same approach 
 neuroscientists use to analyse data in their studies. You should complete all steps by modifying the 
