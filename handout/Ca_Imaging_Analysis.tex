@@ -50,37 +50,30 @@
 \section*{Introduction}
 
 In this practical you will analyse 2-photon imaging data using MATLAB. This is the same approach 
-neuroscientists use to analyse data in their studies. You should complete all steps by modifying the 
-MATLAB functions you have been provided.
+neuroscientists use to analyse data in their studies: what you will do today is very close to how the ``real science'' is done. 
 
 You will be supplied with with raw Ca\supr{++} imaging data from mouse V1. The mouse 
-was anesthetized and was stimulated with drifting black and white grating stimuli, drifting in multiple different directions. From these data
-we can obtain a direction and orientation tuning curve for each cell in the field of view. Your task will be to to 
-extract the raw fluorescence intensity trace from one cell, convert this to $dF/F$, and then 
+was anesthetized and presented with drifting grating stimuli, which traveled in different directions at different times. 
+This allows us to obtain a direction and orientation tuning curve for each motion-sensitive cell in the microscope's field of view.
+\textit{Your} task is to extract the raw fluorescence intensity trace from one cell, convert this to $dF/F$, and then 
 determine the $dF/F$ for each stimulus in order to produce a polar plot that shows response magnitude
-for different drift directions. You will then be able to select different cells and quickly pass the extracted 
-response timecourses through the functions you have written to get tuning curves for several 
-different cells. 
-
-While you work through the exercise, write your responses to the questions in a word or text document. You will need to save several figures, as well as the MATLAB functions you write to solve the exercise.
-
-Remember that typing \texttt{help function\_name} in MATLAB will give you a lot of information about how to use the function.
+for different drift directions. You will then  select different cells and quickly pass the extracted 
+response timecourses through the functions you have written to get tuning curves for different cells. 
 
 
-\section{Start MATLAB and download the data}
+
+\subsection*{Start MATLAB and download the data}
 \begin{itemize}
 \setlength{\parskip}{0.25em}
-\item Open Firefox and download the data needed for this practical from \textit{http://mouse.vision/ca.zip} and unpack the zip archive.
+\item Open Firefox and download \textit{http://mouse.vision/ca.zip}, then unpack the zip archive.
 \item Start MATLAB (menu Applications/Education/Matlab).
-\item Use the change directory button at the top of the screen to navigate to the 
-  \emph{MATLAB\_exercises} directory, within the unzipped archive directory (cf. figure~\ref{fig:toolbar}). 
-\item Run \texttt{addToPath} function in the command line to get a working environment.
+\item Use the change directory button to navigate to the \emph{MATLAB\_exercises} directory, in the unzipped archive (Figure~\ref{fig:toolbar}). 
+\item Run the \texttt{addToPath} function in the command line to add some important functions we provide to the MATLAB
+\textbf{search path}.
 \end{itemize}
 
-All functions you will need to edit are located in the \emph{to\_be\_completed} sub-directory.
-At the end of this tutorial, you will \textbf{have to} give back this sub-directory, with the functions well\dots completed.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{change_dir.eps}
     \caption{}
