@@ -8,7 +8,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{fullpage}
 \usepackage{helvet}
-\usepackage[compact]{titlesec}
+\usepackage[compact,pagestyles]{titlesec}
 \titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 0pt minus 5pt}
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
@@ -23,6 +23,12 @@
 \numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\renewpagestyle{plain}{
+  \sethead{\textbf{Students' names:}}{}{}
+  \headrule
+  \setfoot{}{\thepage}{}
+}
 
 %general text processing
 \newcommand{\supr}[1]{\ensuremath{^{#1}}}
@@ -39,6 +45,7 @@
 \begin{document}
 
 \maketitle % Print the title
+
 
 \section*{Introduction}
 
