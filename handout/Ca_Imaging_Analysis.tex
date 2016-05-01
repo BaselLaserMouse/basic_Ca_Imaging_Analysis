@@ -49,29 +49,28 @@
 
 \section*{Introduction}
 
-In this practical you will analyse 2-photon imaging data using MATLAB. This is the same approach 
-neuroscientists use to analyse data in their studies: what you will do today is very close to how the ``real science'' is done. 
+In this practical you will analyse 2-photon imaging data using MATLAB. This is the same approach
+neuroscientists use to analyse data in their studies: what you will do today is very close to how the ``real science'' is done.
 
-You will be supplied with with raw Ca\supr{++} imaging data from mouse V1. The mouse 
-was anesthetized and presented with drifting grating stimuli, which traveled in different directions at different times. 
+You will be supplied with with raw Ca\supr{++} imaging data from mouse V1. The mouse
+was anesthetized and presented with drifting grating stimuli, which traveled in different directions at different times.
 This allows us to obtain a direction and orientation tuning curve for each motion-sensitive cell in the microscope's field of view.
-\textit{Your} task is to extract the raw fluorescence intensity trace from one cell, convert this to $dF/F$, and then 
+\emph{Your} task is to extract the raw fluorescence intensity trace from one cell, convert this to $dF/F$, and then
 determine the $dF/F$ for each stimulus in order to produce a polar plot that shows response magnitude
-for different drift directions. You will then  select different cells and quickly pass the extracted 
-response timecourses through the functions you have written to get tuning curves for different cells. 
-
+for different drift directions. You will then  select different cells and quickly pass the extracted
+response timecourses through the functions you have written to get tuning curves for different cells.
 
 
 \subsection*{Start MATLAB and download the data}
+
 \begin{itemize}
 \setlength{\parskip}{0.25em}
-\item Open Firefox and download \textit{http://mouse.vision/ca.zip}, then unpack the zip archive.
+\item Open Firefox and download \emph{http://mouse.vision/ca.zip}, then unpack the zip archive.
 \item Start MATLAB (menu Applications/Education/Matlab).
-\item Use the change directory button to navigate to the \emph{MATLAB\_exercises} directory, in the unzipped archive (Figure~\ref{fig:toolbar}). 
+\item Use the change directory button to navigate to the \emph{MATLAB\_exercises} directory, in the unzipped archive (Figure~\ref{fig:toolbar}).
 \item Run the \texttt{addToPath} function in the command line to add some important functions we provide to the MATLAB
 \textbf{search path}.
 \end{itemize}
-
 
 \begin{figure}[h]
     \centering
@@ -80,14 +79,12 @@ response timecourses through the functions you have written to get tuning curves
     \label{fig:toolbar}
 \end{figure}
 
-
-As you work through the exercises, write your responses to the questions on this handout. 
-You will return this to us at the end. 
+As you work through the exercises, write your responses to the questions on this handout.
+You will return this to us at the end.
 You will also need to save figures, as well as the MATLAB functions you write to solve the exercise.
 All functions you will need to edit are located in the \emph{to\_be\_completed} sub-directory.
-At the end of this practical you will make a zip archive of this directory and return it to us at ``\verb|student_results@mouse.vision|''. 
+At the end of this practical you will make a zip archive of this directory and return it to us at ``\verb|student_results@mouse.vision|''.
 Your e-mail should include your names in the message body and have the subject line ``Ca++ practical''
-
 
 
 \section{Extract response time-course from a cell}
@@ -107,7 +104,7 @@ First, you will load images, select a cell and display its raw response trace:
 \item Plot the resulting time course using the \texttt{plot} function (see Figure~\ref{fig:time_trace}). \textbf{Save} your image as ``rawTrace.png''.
 \end{itemize}
 
-Now you will compute the \textit{change} in fluorescence over time ($dF/F$).
+Now you will compute the \emph{change} in fluorescence over time ($dF/F$).
 \begin{itemize}
 \item Open the provided file \texttt{calc\_dF\_F.m}. This function gets as input the raw trace from one cell and returns as output the $dF/F$. \textbf{Edit} the function to calculate and return the $dF/F$, as follows:
   \begin{enumerate}
@@ -119,7 +116,6 @@ Now you will compute the \textit{change} in fluorescence over time ($dF/F$).
 
 \begin{figure}
     \centering
-    
     \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{mean_image.pdf}
     \caption{Mean projection}
@@ -137,8 +133,7 @@ Now you will compute the \textit{change} in fluorescence over time ($dF/F$).
     \caption{$\Delta F/F_0$ time trace}
     \label{fig:time_trace_dff0}
     \end{subfigure}
-    
-    \caption{By the end of this Section you should have obtained plots that look something like these }
+    \caption{By the end of this Section you should have obtained plots that look something like these}
 \end{figure}
 
 
@@ -161,7 +156,7 @@ In the following, you will compute the average response timecourse over the mult
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.46\textwidth}
-    \includegraphics[width=\textwidth]{trace_dff_all_ori.pdf}    
+    \includegraphics[width=\textwidth]{trace_dff_all_ori.pdf}
     \caption{Average response, all orientations}
     \label{fig:trace_all_ori}
     \end{subfigure}
@@ -212,7 +207,7 @@ To assess the selectivity of your cell, you will compute its \emph{orientation s
 
 \section{Repeating for other cells}
 
-You should now have a series of files that you can call in sequence to get a polar plot: \texttt{calc\_dF\_F.m} then \texttt{meanTraces.m} then \texttt{makePolarPlot.m} then \texttt{calc\_osi.m}. If you select a new cell, you can pass it through these functions to quickly generate a polar plot. 
+You should now have a series of files that you can call in sequence to get a polar plot: \texttt{calc\_dF\_F.m} then \texttt{meanTraces.m} then \texttt{makePolarPlot.m} then \texttt{calc\_osi.m}. If you select a new cell, you can pass it through these functions to quickly generate a polar plot.
 
 \begin{itemize}
 \item \textbf{Create} a new function called \texttt{cellbatch}, in a file called \texttt{cellbatch.m}. Provide as an input argument the response time course. In the function body call the functions you have made in order. Passing the correct inputs and outputs to each so that you can feed \texttt{cellbatch} function a response time course and get back a polar plot.
