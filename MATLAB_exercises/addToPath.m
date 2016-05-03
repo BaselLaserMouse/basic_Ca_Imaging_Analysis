@@ -21,7 +21,7 @@ d=dir(pwd);
 for ii=1:length(d)
 
 	%Skip unwanted stuff
-	if ~d(ii).isdir || strcmp(d(ii).name(1),'.')
+	if ~d(ii).isdir || strcmp(d(ii).name(1),'.') || strcmp(d(ii).name(1),'@')
 		continue
 	end
 
