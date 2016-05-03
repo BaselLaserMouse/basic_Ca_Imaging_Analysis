@@ -46,7 +46,14 @@ nTotalStimFrames =
 % creates a variable of specified dimensions. (use variable names not numbers)
 mfResponse = 
 
+
+
 % Loop over presentations
+%
+% This bit is hard. 
+% First read through all four steps below so you get an overview of what you're trying to do.
+% Then fill in the four steps. 
+
 for nPresentation = 1:nTotalStimuli
 
    % ONE: 
