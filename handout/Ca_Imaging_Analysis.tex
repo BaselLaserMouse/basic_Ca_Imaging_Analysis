@@ -1,0 +1,232 @@
+\documentclass[paper=a4, fontsize=11pt]{article} % A4 paper and 11pt font size
+\usepackage{epsfig}            % to insert PostScript figures
+\graphicspath{%
+    {./eps/}
+    {../MATLAB_complete/}
+}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{fullpage}
+\usepackage{helvet}
+\usepackage[compact,pagestyles]{titlesec}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 0pt minus 5pt}
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{gensymb}
+\usepackage{chemmacros}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{todonotes}
+\setlength{\parskip}{18pt}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\renewpagestyle{plain}{
+  \sethead{\textbf{Students' names:}}{}{}
+  \headrule
+  \setfoot{}{\thepage}{}
+}
+
+%general text processing
+\newcommand{\supr}[1]{\ensuremath{^{#1}}}
+\newcommand{\sub}[1]{\ensuremath{_{#1}}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{Ca\supr{++} Imaging Analysis in MATLAB}
+\author{Universit\"{a}t Basel, Mrsic-Flogel Lab}
+\date{}
+
+\begin{document}
+
+\maketitle % Print the title
+
+
+\section*{Introduction}
+
+In this practical you will analyse 2-photon imaging data using MATLAB. This is the same approach
+neuroscientists use to analyse data in their studies: what you will do today is very close to how the ``real science'' is done.
+
+You will be supplied with with raw Ca\supr{++} imaging data from mouse V1. The mouse
+was anesthetized and presented with drifting grating stimuli, which traveled in different directions at different times.
+This allows us to obtain a direction and orientation tuning curve for each motion-sensitive cell in the microscope's field of view.
+\emph{Your} task is to extract the raw fluorescence intensity trace from one cell, convert this to $dF/F$, and then
+determine the $dF/F$ for each stimulus in order to produce a polar plot that shows response magnitude
+for different drift directions. You will then  select different cells and quickly pass the extracted
+response timecourses through the functions you have written to get tuning curves for different cells.
+
+
+\subsection*{Start MATLAB and download the data}
+
+\begin{itemize}
+\setlength{\parskip}{0.25em}
+\item Open Firefox and download \emph{http://mouse.vision/ca.zip}, then unpack the zip archive.
+\item Start MATLAB (menu Applications/Education/Matlab).
+\item Use the change directory button to navigate to the \emph{MATLAB\_exercises} directory, in the unzipped archive (Figure~\ref{fig:toolbar}).
+\item Run the \texttt{addToPath} function in the command line to add some important functions we provide to the MATLAB
+\textbf{search path}.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{change_dir.eps}
+    \caption{}
+    \label{fig:toolbar}
+\end{figure}
+
+As you work through the exercises, write your responses to the questions on this handout.
+You will return this to us at the end.
+You will also need to save figures, as well as the MATLAB functions you write to solve the exercise.
+All functions you will need to edit are located in the \emph{to\_be\_completed} sub-directory.
+At the end of this practical you will make a zip archive of this directory and return it to us at ``\verb|student_results@mouse.vision|''.
+Your e-mail should include your names in the message body and have the subject line ``Ca++ practical''
+
+
+\section{Extract response time-course from a cell}
+
+First, you will load images, select a cell and display its raw response trace:
+
+\begin{itemize}
+\item Load the image stack called \texttt{Calcium\_imaging\_data\_int8.tif} using the provided \texttt{load\_stack} function.
+  Do not forget to use \texttt{help load\_stack} to see how to use this function.
+\item What is the size of the loaded stack (image width and height in pixels, number of frames)? \textbf{Write} down your answer.
+  \vspace{1em}
+\item Open the provided file \texttt{calc\_mean.m} in the ``to\_be\_completed'' directory. \textbf{Edit} it to calculate the average image: use the \texttt{mean} function and assign the result to a variable called \texttt{meanIM}. Use this function to calculate the average image of the loaded stack.
+\item Plot the image using the \texttt{imagesc} function (see Figure~\ref{fig:mean_ca}). \textbf{Save} your image in \emph{to\_be\_completed} as ``meanImage.png''
+\item Look at the image. What does this tell you about the activity of different neurons? \textbf{Write} down your answer:
+  \vspace{2em}
+\item Start the ROI (Region of Interest) selection GUI using the function \texttt{get\_roi\_trace}. 
+See \texttt{help get\_roi\_trace} if you are unsure of the input arguments.
+On the new figure, draw an ellipse around a cell to highlight it. Double-click on the ellipse, and the average time-trace of the pixels within your ROI will be returned.
+\item Plot the resulting time course using the \texttt{plot} function (see Figure~\ref{fig:time_trace}). \textbf{Save} your image as ``rawTrace.png''.
+\end{itemize}
+
+Now you will compute the \emph{change} in fluorescence over time ($dF/F$).
+\begin{itemize}
+\item Open the provided file \texttt{calc\_dF\_F.m}. This function gets as input the raw trace from one cell and returns as output the $dF/F$. \textbf{Edit} the function to calculate and return the $dF/F$, as follows:
+  \begin{enumerate}
+  \item Calculate $dF/F = (F-F_0)/F_0$. $F_0$ is the median of the fluorescence ($F$) distribution. Calculate this using the \texttt{median} function.
+  \item Subtract $F_0$ value from each fluorescence ($F$) value, and then divide the resulting value by $F_0$.
+  \end{enumerate}
+\item Run your \texttt{calc\_dF\_F.m} function on the raw trace and plot the $dF/F$ using \texttt{plot} (see Figure~\ref{fig:time_trace_dff0}). \textbf{Save} your image as ``dffTrace.png''.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{mean_image.pdf}
+    \caption{Mean projection}
+    \label{fig:mean_ca}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{trace_raw.pdf}
+    \caption{Raw fluorescence trace}
+    \label{fig:time_trace}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{trace_delta_f_f0.pdf}
+    \caption{$\Delta F/F_0$ time trace}
+    \label{fig:time_trace_dff0}
+    \end{subfigure}
+    \caption{By the end of this Section you should have obtained plots that look something like these}
+\end{figure}
+
+
+\section{Understanding the stimulus presentation paradigm}
+
+In this dataset, each of the 16 stimulus drift directions was presented 3 times (The drifting grating was presented for 1.5 seconds preceded by a gray screen presented for 3.5 seconds).
+In the following, you will compute the average response timecourse over the multiple repetitions of the same stimulus.
+
+\begin{itemize}
+\item \textbf{Draw} below what this stimulation paradigm looks like over time, by indicating the time in seconds for baseline and for stimulus presentation, for a single presentation of a drafting grating.
+  \vspace{2.5in}
+\item How many frames are in one stimulus presentation (blank+stim)? What is the imaging frame rate? \textbf{Write} down your answers and \textbf{add} the number of frames on your drawing above.
+\item The drift direction in degrees presented for each stimulus frame is saved in the file \texttt{ori\_stimuli.mat}.
+  Load these data using the \texttt{load} function. What is the name of the variable containing the orientation information (look at the work space)?
+  Use the \texttt{plot} command to look at the contents of this variable. What do you notice about the order in which the stimuli are presented? 
+  \textbf{Write} your answer:\\
+  \vspace{2in}
+\item Open the provided file \texttt{meanTraces.m}. This function will be used to split up the response into presentations of the same directions, over the three trials per direction, and average over trials. \textbf{Complete} the file \texttt{meanTraces.m}. Pay attention to the comments in the file.
+\item Your \texttt{meanTraces} function averages the three individual trial traces for each direction. 
+ Plot these average traces for each of the 16 stimulus directions on the same plot (see Figure~\ref{fig:trace_all_ori}). \textbf{Save} your image as ``meanTraces.png''
+\item Plot a single average trace over all stimuli. Where does the peak fall with respect to the stimulus start time? Refer to your diagram, above.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.46\textwidth}
+    \includegraphics[width=\textwidth]{trace_dff_all_ori.pdf}
+    \caption{Average response, all orientations}
+    \label{fig:trace_all_ori}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.44\textwidth}
+        \includegraphics[width=\textwidth]{polar_ori.pdf}
+        \caption{Polar plot of average response}
+        \label{fig:polar_ori_plot}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+
+
+\section{Calculate responses to different stimuli}
+
+You will now find the mean response to each of the 16 stimulus orientations.
+
+\begin{itemize}
+\item Open the file \texttt{makePolarPlot.m}. This function will be used to display the mean response for each orientation.
+  \textbf{Edit} the function as follows:
+  \begin{enumerate}
+  \item Choose a window of 5 time points that should contain the peak response to a stimulus, during the stimulus period.
+  \item Average the 5 time points within this window, from the average timecourse of each stimulus orientation.
+  \item Plot the mean responses on a polar plot, which will reveal the orientation tuning of the cell, using the \texttt{polar} function (see Figure~\ref{fig:polar_ori_plot}).
+  \end{enumerate}
+\item Why is a polar plot a better choice than a conventional x/y line or scatter plot? \textbf{Write} down your answer.
+  \vspace{1em}
+\item Use the \texttt{makePolarPlot} function to plot the preferred orientation(s) of your cell. \textbf{Save} your image as ``polarResult.png''.
+\item Is your cell tuned to the drift direction of the stimulus? Is your cell tuned to the drift direction of two stimuli of the same orientation?
+  \textbf{Write} down your answer.
+  \vspace{2em}
+\end{itemize}
+
+To assess the selectivity of your cell, you will compute its \emph{orientation selectivity index} (OSI).
+
+\begin{itemize}
+\item \textbf{Edit} the file \texttt{calc\_osi.m} as follows:
+  \begin{enumerate}
+  \item Find the stimulus direction that caused the biggest response (`preferred' stimulus).
+  \item Find the mean response of the preferred stimulus, and the stimulus of opposite drift direction (180 degrees away), and average the two values.
+  \item Find the mean response of the two stimuli that are 90 degree away from the preferred stimulus (`orthogonal' stimuli), and average the two values.
+  \item Orientation selectivity index (OSI) is calculated as \\ $OSI = {\left(preferred - orthogonal\right)} / {\left(preferred + orthogonal\right)}$
+  \end{enumerate}
+\item Add the OSI to your polar plot, using the \texttt{title} function.
+  \textbf{Replace} the previously saved image by this one.
+\end{itemize}
+
+
+\section{Repeating for other cells}
+
+You should now have a series of files that you can call in sequence to get a polar plot: \texttt{calc\_dF\_F.m} then \texttt{meanTraces.m} then \texttt{makePolarPlot.m} then \texttt{calc\_osi.m}. If you select a new cell, you can pass it through these functions to quickly generate a polar plot.
+
+\begin{itemize}
+\item \textbf{Create} a new function called \texttt{cellbatch}, in a file called \texttt{cellbatch.m}. Provide as an input argument the response time course. In the function body call the functions you have made in order. Passing the correct inputs and outputs to each so that you can feed \texttt{cellbatch} function a response time course and get back a polar plot.
+\item Run \texttt{cellbatch} for 5 different cells and \textbf{save} the resulting plots.
+\end{itemize}
+
+
+\section*{Documents to give back}
+At the end of this practical you should give back:
+\begin{itemize}
+  \item This handout, completed with your names and answers to the questions,
+  \item A archive (.zip) file containing the completed functions and saved images. This should be returned along with your names in the 
+  e-mail body to ``\verb|student_results@mouse.vision|''. It should have the subject line ``Ca++ practical''
+\end{itemize}
+
+\end{document}
