@@ -33,7 +33,7 @@ tTotalStimDuration =
 
 % Estimate the frame rate of imaging. Hint: The function 'numel' returns
 % how many elements there are in a vector. (use variable names not numbers)
-tFrameRate = 
+tFrameRate =  numel(vfTrace_dFF0) ./ ( FILL_IN_THIS )
 
 % How many frames were there in each stimulus presentation?
 %(use variable names not numbers)
@@ -63,28 +63,30 @@ for nPresentation = 1:nTotalStimuli
    % it will 1+nTotalStimFrames:nTotalStimFrames*2  and so on
    %  Hint: (1:N) creates a vector of numbers that goes 1 2 3 ... N
    %  Remember that this will need to increment to the right value on each pass through the loop
-   vnWindow = 
+   vnWindow = (1:nTotalStimFrames) +  nTotalStimFrames * FILL_IN_THIS;
    
    % TWO:
    % Find the stimulus direction that was presented and assign this to fThisOri
    % The stimulus direction is in the Orientation vector. 
    % hint: You already know which indexes correspond to this orientation from vnWindow
-   fThisOri = 
+   firstIndexValue = %COMPLETE THIE LINE
+   fThisOri = Orientation(firstIndexValue); %Do not edit this line
 
    % THREE:
-   % Your variable mfResponse is a matrix in which each row comprises data from one stimulus. 
-   % we need to figure out into which which row data from this orientation will go. To do this,
-   % you now need to convert fThisOr (the orientation value) to an index that has a value between 1 and nNumStimuli 
+   % The variable we are trying to build, mfResponse, will be a matrix in which each row 
+   % comprises data from one stimulus. We need to figure out into which row data from the 
+   % current orientation will go. To do this, you now need to convert fThisOri (the orientation 
+   % value) to an index that has a value between 1 and nNumStimuli 
    % Hint: The directions span 360 degrees, and there are 16 of them. 
-   nThisOriIndex = 
+   nThisOriIndex = (fThisOri / FILL_IN_THIS) * FILL_IN_THIS  %COMPLETE THIS LINE
    
    % FOUR:
    % - Add the dF/F data from 'vfTrace_dFF0' into the matrix 'mfResponse'. You will need
    % to use the stimulus index for 'mfResponse' and the window you made for
    % 'vfTrace_dFF0'. Hint: mfResponse(nIndex, :) assigns something to all
    % the entries along the dimension with the ':'.
-   
+   mfResponse(nThisOriIndex, :) = % COMPLETE THIS LINE
 end
 
 % - Convert 'mfResponse' to an average by dividing by the number of trials
-mfResponse = 
+mfResponse = mfResponse ./ FILL_IN_THIS % COMPLETE THIS LINE
