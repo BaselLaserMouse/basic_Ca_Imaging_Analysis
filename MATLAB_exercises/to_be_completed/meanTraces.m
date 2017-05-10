@@ -40,7 +40,7 @@ tFrameRate =  numel(vfTrace_dFF0) ./ ( FILL_IN_THIS )
 nTotalStimFrames = 
 
 % Allocate the return variable 'mfResponse', which should be an empty matrix of zeros.
-% Each row will eventually contain the average data of all triels from one stimulus.
+% Each row **will eventually contain the average data of all trials** from one stimulus.
 % Each column will correspond to data from one time point with respect to the start of the stimulus
 % Hint: the function 'zeros' and think how many frames per stimulus and how many stimuli
 % creates a variable of specified dimensions. (use variable names not numbers)
@@ -61,8 +61,8 @@ for nPresentation = 1:nTotalStimuli
    % from 'vfTrace_dFF0' that correspond to this stimulus presentation. So the first
    % pass through the loop this will be 1:nTotalStimFrames, the second pass through the loop
    % it will 1+nTotalStimFrames:nTotalStimFrames*2  and so on
-   %  Hint: (1:N) creates a vector of numbers that goes 1 2 3 ... N
-   %  Remember that this will need to increment to the right value on each pass through the loop
+   % In the code that follows, remember that (1:N) creates a vector of numbers that goes 1 2 3 ... to N
+   % So think how this needs to change on each pass through the loop:
    vnWindow = (1:nTotalStimFrames) +  nTotalStimFrames * FILL_IN_THIS;
    
    % TWO:
@@ -85,6 +85,8 @@ for nPresentation = 1:nTotalStimuli
    % to use the stimulus index for 'mfResponse' and the window you made for
    % 'vfTrace_dFF0'. Hint: mfResponse(nIndex, :) assigns something to all
    % the entries along the dimension with the ':'.
+   % Remember that your task here is for each row to contain the average response to one stimulus.
+   % So think what to enter here. HINT: look wht happens after the loop ends. 
    mfResponse(nThisOriIndex, :) = % COMPLETE THIS LINE
 end
 
