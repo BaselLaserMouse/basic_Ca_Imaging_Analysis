@@ -11,8 +11,8 @@ To get a .pdf for sources:
 
 - make sure you have TeX distribution installed on your computer, e.g.
   [TeX Live](https://www.tug.org/texlive/),
-- use `latexmk -pdf basic_matlab.tex` in the command line, in the `handout`
-  folder,
+- use `latexmk -pdf Ca_Imaging_Analysis.tex` in the command line, in the
+  `handout` folder,
 - get ride of auxiliary file with `latexmk -c`, in the same folder.
 
 A precompiled version is available at
