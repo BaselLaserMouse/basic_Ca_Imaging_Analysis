@@ -1,19 +1,20 @@
 # Calcium imaging analysis in MATLAB
 
 This repository contains material for the calcium imaging analysis tutorial
-given during the 2016 *Blockkurs*.
+run by the Mrsic-Flogel lab for the ndergraduate *Blockkurs* students. 
+The analysis is conducted in MATLAB. 
 
 
 ## Handout
 
-Handout has been written with LaTeX. Sources are in the `handout` sub-folder.
+The handout has been written with LaTeX. Sources are in the `handout` sub-folder.
 To get a .pdf for sources:
 
-- make sure you have TeX distribution installed on your computer, e.g.
+- Make sure you have TeX distribution installed on your computer, e.g.
   [TeX Live](https://www.tug.org/texlive/),
-- use `latexmk -pdf Ca_Imaging_Analysis.tex` in the command line, in the
+- Use `latexmk -pdf Ca_Imaging_Analysis.tex` in the command line, in the
   `handout` folder,
-- get ride of auxiliary file with `latexmk -c`, in the same folder.
+- Get rid of auxiliary file with `latexmk -c`, in the same folder.
 
 A precompiled version is available at
 [mouse.vision](http://mouse.vision/Ca_Imaging_Analysis.pdf).
@@ -21,9 +22,9 @@ A precompiled version is available at
 
 ## Code
 
-- Exercises code is located in `MATLAB_exercises` sub-folder.
-- Solutions are located in `MATLAB_complete` sub-folder. It only contains
-  functions files that need to be completed.
+- Exercises code is located in the `MATLAB_exercises` sub-folder.
+- Solutions are located in the `MATLAB_complete` sub-folder. It only contains
+  function files that need to be completed.
 
 
 ## Note for maintainer
