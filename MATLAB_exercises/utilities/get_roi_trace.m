@@ -13,7 +13,7 @@ if size(tfStack, 3) < 2
     error('Input stack has only one frame!')
 end
 
-imtool(mean(tfStack, 3), [0 5]);
+imtool(mean(tfStack, 3), [0 5], 'InitialMagnification', 'fit');
 h = imellipse(imgca());
 maskPos = wait(h);
 if ~isempty(maskPos)
