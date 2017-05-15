@@ -24,5 +24,5 @@ vfStimOri = vfStimOri(2:end)';
 figure;
 axis;
 set(gca, 'FontSize', 32, 'LineWidth', 2);
-h = polar(vfStimOri([1:end 1]), vfMeanResp([1:end 1]));
+h = polarplot(vfStimOri([1:end 1]), vfMeanResp([1:end 1]));
 set(h, 'LineWidth', 2);
