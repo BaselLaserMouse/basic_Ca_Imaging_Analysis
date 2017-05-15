@@ -27,7 +27,3 @@ A precompiled version is available at
   function files that need to be completed.
 
 
-## Note for maintainer
-
-Run `sendToWeb.sh` script to upload material to
-[mouse.vision](http://mouse.vision). Note that you need to be Rob ;-).
