@@ -54,17 +54,19 @@ mfResponse =
 % First read through all four steps below so you get an overview of what you're trying to do.
 % Then fill in the four steps. 
 
-for nPresentation = 1:nTotalStimuli
+for nPresentation = 1:nTotalStimuli % Use for loop to process each stimulus at a time
 
    % ONE: 
-   % You first need to create a set of index values that will pull out the frames
-   % from 'vfTrace_dFF0' that correspond to this stimulus presentation. So the first
-   % pass through the loop this will be 1:nTotalStimFrames, the second pass through the loop
-   % it will 1+nTotalStimFrames:nTotalStimFrames*2  and so on
-   % In the code that follows, remember that (1:N) creates a vector of numbers that goes 1 2 3 ... to N
-   % So think how this needs to change on each pass through the loop:
-   vnWindow = (1:nTotalStimFrames) +  nTotalStimFrames * FILL_IN_THIS;
-   
+   % We will fill in the first line for you, but you need to understand what it does and why. 
+   % The variable vnWindow is used to "index" (i.e. obtain) values (imaging frames) from
+   % variable 'vfTrace_dFF0' that correspond to a single stimulus presentation. The stimulus
+   % presentation is incremented (moved to the next one along) on each pass through the for loop.
+   % So on the first pass through the loop, vnWindow equals 1:nTotalStimFrames, on the second 
+   % pass through the loop it will be 1+nTotalStimFrames:nTotalStimFrames*2  and so on.
+   % Remember that (1:N) creates a vector of numbers that goes 1 2 3 ... to N
+   % You will use the variable vnWindow when you fill in the remaining lines.
+   vnWindow = (1:nTotalStimFrames) + (nPresentation-1) * nTotalStimFrames;
+    
    % TWO:
    % Find the stimulus direction that was presented and assign this to fThisOri
    % The stimulus direction is in the Orientation vector. 
