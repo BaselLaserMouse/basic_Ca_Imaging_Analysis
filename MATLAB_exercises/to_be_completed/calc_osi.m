@@ -6,8 +6,8 @@ function fOSI = calc_osi(vfMeanResp)
 
 nNumStimuli =
 
-% Find the preferred stimulus direction. Hint: The 'max' command also
-% returns the index of the maximum value.
+% Find the preferred stimulus direction. Hint: The 'max' command returns
+% *two* values, one of which is the index of the maximum value.
 vnPreferredOri(1) =
 
 % Find the index of the stimulus 180 degrees off from preferred.
