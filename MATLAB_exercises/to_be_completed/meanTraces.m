@@ -39,11 +39,15 @@ tFrameRate =  numel(vfTrace_dFF0) ./ ( FILL_IN_THIS )
 %(use variable names not numbers)
 nTotalStimFrames = 
 
-% Allocate the return variable 'mfResponse', which should be an empty matrix of zeros.
-% Each row **will eventually contain the average data of all trials** from one stimulus.
-% Each column will correspond to data from one time point with respect to the start of the stimulus
-% Hint: the function 'zeros' and think how many frames per stimulus and how many stimuli
-% creates a variable of specified dimensions. (use variable names not numbers)
+% Allocate the return variable 'mfResponse', which should be an empty
+% matrix of zeros. You need to work out how big this matrix should be, and
+% create it using the function 'zeros'.
+% * Each row should be the correct size to contain the response to one
+% stimulus, averaged over all trials.
+% * Each column will correspond to data from one imaging frame, for a time
+% point relative to the start of the stimulus.
+% * Hint: Read "help zeros". Think how many frames there are per stimulus,
+% and how many stimuli there are. Use variable names not numbers.
 mfResponse = 
 
 

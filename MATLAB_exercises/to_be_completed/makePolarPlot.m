@@ -42,6 +42,6 @@ vfMeanResp =
 %        b) 'linspace' creates a vector of equally spaced numbers between two values.
 vfStimOri = 
 
-% Create a polar plot using the command 'polar'
+% Create a polar plot using the command 'polarplot'
 % Note: both input variables to polar should have the same size (they should both be row vectors or both be column vectors)
-polar
+polarplot
