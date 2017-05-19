@@ -35,9 +35,9 @@ tTotalStimDuration =
 % how many elements there are in a vector. (use variable names not numbers)
 tFrameRate =  numel(vfTrace_dFF0) ./ ( FILL_IN_THIS )
 
-% How many frames were there in each stimulus presentation?
+% How many frames were there in each trial (i.e. the blank and stim periods)?
 %(use variable names not numbers)
-nTotalStimFrames = 
+nTotalTrialFrames = 
 
 % Allocate the return variable 'mfResponse', which should be an empty
 % matrix of zeros. You need to work out how big this matrix should be, and
@@ -69,7 +69,7 @@ for nPresentation = 1:nTotalStimuli % Use for loop to process each stimulus at a
    % pass through the loop it will be 1+nTotalStimFrames:nTotalStimFrames*2  and so on.
    % Remember that (1:N) creates a vector of numbers that goes 1 2 3 ... to N
    % You will use the variable vnWindow when you fill in the remaining lines.
-   vnWindow = (1:nTotalStimFrames) + (nPresentation-1) * nTotalStimFrames;
+   vnWindow = (1:nTotalTrialFrames) + (nPresentation-1) * nTotalTrialFrames;
     
    % TWO:
    % Find the stimulus direction that was presented and assign this to fThisOri
